@@ -504,7 +504,7 @@ input:checked+.slider:before{transform:translateX(20px);}
       <div class="scroll-tab active" onclick="switchChatTab('public',this)">🌐 Public Chat</div>
       <div class="scroll-tab" onclick="switchChatTab('private',this)">🔒 Private DM</div>
     </div>
-    <div class="chat-sec-notice"><i class="fas fa-shield-alt"></i> Confidential Chat — Screenshot Not Allowed</div>
+    <div class="chat-sec-notice"><i class="fas fa-shield-alt"></i> Chat Box</div>
 
     <!-- PUBLIC CHAT -->
     <div id="public-chat-view" class="chat-container">
@@ -528,7 +528,7 @@ input:checked+.slider:before{transform:translateX(20px);}
           <button class="btn btn-secondary btn-sm btn-icon" onclick="backToPrivateList()"><i class="fas fa-arrow-left"></i></button>
           <img id="private-chat-avatar" src="" class="avatar">
           <div style="font-weight:700" id="private-chat-name"></div>
-          <div style="margin-left:auto;display:flex;align-items:center;gap:6px"><button class="btn btn-sm" style="background:linear-gradient(135deg,#1a6b3c,#2d9b5a);color:#fff;padding:7px 12px;border-radius:50%;width:36px;height:36px" onclick="startVideoCall()" title="Start Video Call"><i class="fas fa-video"></i></button><span style="font-size:.65rem;color:var(--accent);background:rgba(245,166,35,.1);padding:3px 8px;border-radius:20px;font-weight:700">⏱10s</span></div>
+          <div style="margin-left:auto;font-size:.7rem;color:var(--accent);background:rgba(245,166,35,.1);padding:3px 9px;border-radius:20px;font-weight:700">⏱ 10s auto-remove</div>
         </div>
         <div class="chat-container">
           <div class="chat-messages" id="private-chat-messages"></div>
@@ -697,44 +697,6 @@ input:checked+.slider:before{transform:translateX(20px);}
     <div class="nav-item" onclick="showPage('profile')" id="nav-profile"><i class="fas fa-user"></i><span>Profile</span></div>
   </nav>
 </div>
-
-
-<!-- VIDEO CALL MODAL -->
-<div id="video-call-modal" style="display:none;position:fixed;inset:0;background:#000;z-index:2000;flex-direction:column">
-  <video id="remote-video" autoplay playsinline style="width:100%;height:100%;object-fit:cover;background:#111"></video>
-  <video id="local-video" autoplay playsinline muted style="position:absolute;top:14px;right:14px;width:110px;height:150px;object-fit:cover;border-radius:14px;border:2px solid rgba(255,255,255,.3);background:#222;z-index:10"></video>
-  <div style="position:absolute;top:14px;left:14px;z-index:10">
-    <div style="background:rgba(0,0,0,.55);color:#fff;padding:8px 14px;border-radius:20px;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:8px">
-      <div style="width:8px;height:8px;background:#22c55e;border-radius:50%;animation:vcpulse 1.5s infinite"></div>
-      <span id="vc-status">Connecting...</span>
-    </div>
-  </div>
-  <div id="vc-waiting-screen" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,#0f4a28,#1a6b3c)">
-    <img id="vc-peer-photo" src="" style="width:90px;height:90px;border-radius:50%;border:4px solid rgba(255,255,255,.3);margin-bottom:16px">
-    <div id="vc-peer-name" style="color:#fff;font-size:1.2rem;font-weight:800;margin-bottom:6px"></div>
-    <div id="vc-wait-label" style="color:rgba(255,255,255,.6);font-size:.82rem;margin-bottom:32px">Ringing...</div>
-  </div>
-  <div style="position:absolute;bottom:30px;left:0;right:0;display:flex;justify-content:center;gap:18px;z-index:10">
-    <button id="vc-mute-btn" onclick="toggleMute()" style="width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.1rem;cursor:pointer"><i class="fas fa-microphone" id="mute-icon"></i></button>
-    <button onclick="endCall()" style="width:64px;height:64px;border-radius:50%;background:#e53e3e;border:none;color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(229,62,62,.4)"><i class="fas fa-phone-slash"></i></button>
-    <button onclick="toggleCamera()" style="width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.1rem;cursor:pointer"><i class="fas fa-video" id="cam-icon"></i></button>
-  </div>
-</div>
-<!-- INCOMING CALL POPUP -->
-<div id="incoming-call-popup" style="display:none;position:fixed;top:14px;left:14px;right:14px;background:var(--card);border-radius:20px;padding:18px;box-shadow:0 12px 48px rgba(0,0,0,.35);z-index:1999;border:2px solid #2d9b5a">
-  <div style="display:flex;align-items:center;gap:13px">
-    <img id="inc-caller-photo" src="" style="width:52px;height:52px;border-radius:50%;border:2px solid #2d9b5a">
-    <div style="flex:1">
-      <div style="font-weight:800;font-size:.95rem" id="inc-caller-name"></div>
-      <div style="font-size:.75rem;color:var(--muted)">📹 Incoming video call...</div>
-    </div>
-    <div style="display:flex;gap:10px">
-      <button onclick="answerCall()" style="width:46px;height:46px;border-radius:50%;background:#22c55e;border:none;color:#fff;font-size:1rem;cursor:pointer"><i class="fas fa-phone"></i></button>
-      <button onclick="rejectCall()" style="width:46px;height:46px;border-radius:50%;background:#e53e3e;border:none;color:#fff;font-size:1rem;cursor:pointer"><i class="fas fa-phone-slash"></i></button>
-    </div>
-  </div>
-</div>
-<style>@keyframes vcpulse{0%,100%{opacity:1}50%{opacity:.3}}</style>
 
 <!-- CREATE POST MODAL -->
 <div class="modal-ov hidden" id="create-post-modal">
@@ -1035,7 +997,7 @@ function initApp() {
   if(currentUser.uid !== 'admin_local') {
     setDoc(doc(db,'online',currentUser.uid),{uid:currentUser.uid,name:currentUserData.name,ts:serverTimestamp()});
   }
-  initChatSecurity(); initLogoTap(); listenIncomingCalls();
+  initChatSecurity(); initLogoTap();
 }
 
 function updateHeaderUI() {
@@ -1870,183 +1832,6 @@ el('install-btn')?.addEventListener('click',async()=>{
   if(outcome==='accepted'){el('install-banner').classList.remove('show');showToast('App installed! 📱');}
   deferredInstall=null;
 });
-
-
-// ===== VIDEO CALL (WebRTC + Firebase Signaling) =====
-let localStream = null, remoteStream = null;
-let peerConn = null, callDocRef = null, callUnsub = null;
-let isCaller = false, micMuted = false, camOff = false;
-let incomingCallUnsub = null;
-
-const ICE_SERVERS = { iceServers:[{urls:['stun:stun1.l.google.com:19302','stun:stun2.l.google.com:19302']}] };
-
-window.startVideoCall = async function() {
-  if(!selectedPrivateChatUser){showToast('Open a chat first','warning');return;}
-  if(isGuest){showToast('Login to use video call','warning');return;}
-  try {
-    localStream = await navigator.mediaDevices.getUserMedia({video:true,audio:true});
-    el('local-video').srcObject = localStream;
-    isCaller = true;
-    const callId = [currentUser.uid, selectedPrivateChatUser.uid].sort().join('_call_');
-    callDocRef = doc(db,'videoCalls',callId);
-    await setDoc(callDocRef,{
-      callerId:currentUser.uid, callerName:currentUserData.name,
-      callerPhoto:currentUserData.photoURL||'',
-      receiverId:selectedPrivateChatUser.uid,
-      status:'ringing', createdAt:serverTimestamp(),
-      offer:null, answer:null
-    });
-    peerConn = new RTCPeerConnection(ICE_SERVERS);
-    localStream.getTracks().forEach(t=>peerConn.addTrack(t,localStream));
-    remoteStream = new MediaStream();
-    el('remote-video').srcObject = remoteStream;
-    peerConn.ontrack = e => e.streams[0].getTracks().forEach(t=>remoteStream.addTrack(t));
-    // ICE candidates
-    peerConn.onicecandidate = async e => {
-      if(e.candidate) {
-        await addDoc(collection(db,'videoCalls',callId,'callerCandidates'), e.candidate.toJSON());
-      }
-    };
-    const offer = await peerConn.createOffer();
-    await peerConn.setLocalDescription(offer);
-    await updateDoc(callDocRef,{offer:{type:offer.type,sdp:offer.sdp}});
-    // Show modal
-    el('video-call-modal').style.display='flex';
-    el('vc-peer-photo').src = selectedPrivateChatUser.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(selectedPrivateChatUser.name)}&background=1a6b3c&color=fff`;
-    el('vc-peer-name').textContent = selectedPrivateChatUser.name;
-    el('vc-wait-label').textContent = 'Ringing...';
-    el('vc-status').textContent = 'Calling...';
-    // Listen for answer
-    callUnsub = onSnapshot(callDocRef, async snap=>{
-      const data = snap.data();
-      if(!data) return;
-      if(data.status==='answered' && data.answer && peerConn.signalingState!=='stable'){
-        const ans = new RTCSessionDescription(data.answer);
-        await peerConn.setRemoteDescription(ans);
-        el('vc-waiting-screen').style.display='none';
-        el('vc-status').textContent = 'Connected ✓';
-        showToast('Video call connected! 📹');
-      }
-      if(data.status==='ended') endCall(true);
-      if(data.status==='rejected'){showToast('Call declined','warning');endCall(true);}
-    });
-    // Listen for receiver candidates
-    onSnapshot(collection(db,'videoCalls',callId,'receiverCandidates'), snap=>{
-      snap.docChanges().forEach(async change=>{
-        if(change.type==='added'&&peerConn){
-          try{await peerConn.addIceCandidate(new RTCIceCandidate(change.doc.data()));}catch(e){}
-        }
-      });
-    });
-  } catch(e) {
-    showToast(e.name==='NotAllowedError'?'Camera/mic permission denied':e.message,'error');
-    endCall(true);
-  }
-};
-
-// Listen for incoming calls
-function listenIncomingCalls() {
-  if(!currentUser||isGuest) return;
-  const q = query(collection(db,'videoCalls'), where('receiverId','==',currentUser.uid), where('status','==','ringing'));
-  incomingCallUnsub = onSnapshot(q, snap=>{
-    snap.docChanges().forEach(change=>{
-      if(change.type==='added'){
-        const data = change.doc.data();
-        showIncomingCall(change.doc.id, data);
-      }
-    });
-  });
-}
-
-function showIncomingCall(callId, data) {
-  el('inc-caller-name').textContent = data.callerName||'Someone';
-  el('inc-caller-photo').src = data.callerPhoto||`https://ui-avatars.com/api/?name=${encodeURIComponent(data.callerName||'C')}&background=1a6b3c&color=fff`;
-  el('incoming-call-popup').style.display='block';
-  el('incoming-call-popup').dataset.callId = callId;
-  el('incoming-call-popup').dataset.callerId = data.callerId;
-  el('incoming-call-popup').dataset.callerName = data.callerName||'';
-  el('incoming-call-popup').dataset.callerPhoto = data.callerPhoto||'';
-}
-
-window.answerCall = async function() {
-  const popup = el('incoming-call-popup');
-  const callId = popup.dataset.callId;
-  popup.style.display='none';
-  callDocRef = doc(db,'videoCalls',callId);
-  try {
-    localStream = await navigator.mediaDevices.getUserMedia({video:true,audio:true});
-    el('local-video').srcObject = localStream;
-    isCaller = false;
-    peerConn = new RTCPeerConnection(ICE_SERVERS);
-    localStream.getTracks().forEach(t=>peerConn.addTrack(t,localStream));
-    remoteStream = new MediaStream();
-    el('remote-video').srcObject = remoteStream;
-    peerConn.ontrack = e => e.streams[0].getTracks().forEach(t=>remoteStream.addTrack(t));
-    peerConn.onicecandidate = async e=>{
-      if(e.candidate) await addDoc(collection(db,'videoCalls',callId,'receiverCandidates'),e.candidate.toJSON());
-    };
-    const callData = (await getDoc(callDocRef)).data();
-    await peerConn.setRemoteDescription(new RTCSessionDescription(callData.offer));
-    const answer = await peerConn.createAnswer();
-    await peerConn.setLocalDescription(answer);
-    await updateDoc(callDocRef,{answer:{type:answer.type,sdp:answer.sdp},status:'answered'});
-    // Listen for caller ICE
-    onSnapshot(collection(db,'videoCalls',callId,'callerCandidates'),snap=>{
-      snap.docChanges().forEach(async change=>{
-        if(change.type==='added'&&peerConn){
-          try{await peerConn.addIceCandidate(new RTCIceCandidate(change.doc.data()));}catch(e){}
-        }
-      });
-    });
-    el('video-call-modal').style.display='flex';
-    el('vc-waiting-screen').style.display='none';
-    el('vc-status').textContent = 'Connected ✓';
-    el('vc-peer-photo').src = popup.dataset.callerPhoto||`https://ui-avatars.com/api/?name=C&background=1a6b3c&color=fff`;
-    el('vc-peer-name').textContent = popup.dataset.callerName;
-  } catch(e){showToast(e.name==='NotAllowedError'?'Camera/mic permission denied':e.message,'error');endCall(true);}
-};
-
-window.rejectCall = async function() {
-  const popup = el('incoming-call-popup');
-  const callId = popup.dataset.callId;
-  popup.style.display='none';
-  try{ await updateDoc(doc(db,'videoCalls',callId),{status:'rejected'}); }catch(e){}
-};
-
-window.endCall = async function(silent=false) {
-  if(callDocRef && !silent){
-    try{ await updateDoc(callDocRef,{status:'ended'}); }catch(e){}
-  }
-  if(callUnsub){ callUnsub(); callUnsub=null; }
-  if(peerConn){ peerConn.close(); peerConn=null; }
-  if(localStream){ localStream.getTracks().forEach(t=>t.stop()); localStream=null; }
-  remoteStream=null; callDocRef=null;
-  el('video-call-modal').style.display='none';
-  el('vc-waiting-screen').style.display='flex';
-  el('local-video').srcObject=null;
-  el('remote-video').srcObject=null;
-  el('mute-icon').className='fas fa-microphone';
-  el('cam-icon').className='fas fa-video';
-  micMuted=false; camOff=false;
-  if(!silent) showToast('Call ended');
-};
-
-window.toggleMute = function() {
-  if(!localStream) return;
-  micMuted=!micMuted;
-  localStream.getAudioTracks().forEach(t=>t.enabled=!micMuted);
-  el('mute-icon').className=micMuted?'fas fa-microphone-slash':'fas fa-microphone';
-  el('vc-mute-btn').style.background=micMuted?'rgba(229,62,62,.7)':'rgba(255,255,255,.15)';
-};
-
-window.toggleCamera = function() {
-  if(!localStream) return;
-  camOff=!camOff;
-  localStream.getVideoTracks().forEach(t=>t.enabled=!camOff);
-  el('cam-icon').className=camOff?'fas fa-video-slash':'fas fa-video';
-  el('vc-cam-btn').style.background=camOff?'rgba(229,62,62,.7)':'rgba(255,255,255,.15)';
-};
-
 
 // ===== SERVICE WORKER =====
 if('serviceWorker' in navigator){
